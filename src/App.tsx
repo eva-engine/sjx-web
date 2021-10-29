@@ -1,11 +1,21 @@
-import { useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import { LoginPage } from "./page/login";
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    location.hash = '/login';
+  }, [])
 
   return (
-    <></>
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <LoginPage></LoginPage>
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 

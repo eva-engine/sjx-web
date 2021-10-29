@@ -1,0 +1,57 @@
+.login-page {
+  position: relative;
+  background: url("/btn.png") no-repeat center 100rpx/ 500rpx;
+  width: 750rpx;
+  height: 100vh;
+  padding-top: 600rpx;
+  &::before {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 200rpx;
+    left: 0;
+    content: "箭";
+    font-size: 180rpx;
+    font-family: cursive;
+    color: aqua;
+  }
+  .input {
+    position: relative;
+    width: 600rpx;
+    height: 80rpx;
+    box-sizing: border-box;
+    margin: 30rpx auto;
+    border-bottom: 1px solid #646464;
+    input {
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      font-size: 30rpx;
+      // text-indent: 2em;
+    }
+    .code-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #77a;
+      height: 100%;
+      text-align: center;
+      font-size: 24rpx;
+      line-height: 80rpx;
+    }
+  }
+  .login-btn {
+    width: 50vw;
+    text-align: center;
+    line-height: 90rpx;
+    height: 90rpx;
+    font-size: 30rpx;
+    background-color: #84ad80;
+    color: #fff;
+    margin-top: 100rpx;
+    border-radius: 50rpx;
+    border: 1px solid rgba(100, 100, 100, 0.5);
+  }
+}

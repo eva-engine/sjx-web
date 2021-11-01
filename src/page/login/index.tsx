@@ -3,7 +3,9 @@ import { UnloginedGlobalUser } from "../../net/user";
 import { storage } from "../../storage";
 import "./index.scss";
 export function LoginPage() {
+
   const [autoLogin, setAutoLogin] = useState(false);
+
   const [logining, setLogining] = useState(false);
 
   useEffect(() => {

@@ -5,6 +5,11 @@
   height: 100vh;
   padding-top: 600rpx;
   box-sizing: border-box;
+  .logining-tip{
+    margin-top: 350rpx;
+    text-align: center;
+    font-size: 35rpx;
+  }
   &::before {
     position: absolute;
     text-align: center;
@@ -54,5 +59,19 @@
     margin-top: 100rpx;
     border-radius: 50rpx;
     border: 1px solid rgba(100, 100, 100, 0.5);
+  }
+  .bottom-layer {
+    position: absolute;
+    bottom: 30rpx;
+    width: 100%;
+    font-size: 16rpx;
+    display: flex;
+    justify-content: space-around;
+    .btn{
+      color: gray;
+      &.disabled{
+        pointer-events: none;
+      }
+    }
   }
 }

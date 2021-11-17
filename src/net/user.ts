@@ -1,5 +1,6 @@
+import { storage } from "../storage";
 import { CustomData, User } from "./define";
-import { loginByEmailCode, loginWithToken } from "./http/api";
+import { loginByEmailCode, loginByPassword, loginWithToken, registerByPassword } from "./http/api";
 import { axiosInstance } from "./http/config";
 
 /**
@@ -17,8 +18,6 @@ export const UnloginedGlobalUser = new class {
   logined = false
   logining = false
 
-  token?: string
-
   assign(user: User) {
     for (const key of Object.keys(user)) {
       //@ts-ignore
@@ -29,8 +28,9 @@ export const UnloginedGlobalUser = new class {
     (axiosInstance.defaults.headers as unknown as { token: string })['token'] = token;
     this.logining = true;
     const promise = (async () => {
-      const user = await loginWithToken();
-      (axiosInstance.defaults.headers as unknown as { token: string })['token'] = user.token;
+      const { user, token } = await loginWithToken();
+      (axiosInstance.defaults.headers as unknown as { token: string })['token'] = token;
+      storage.token = token;
       this.assign(user);
       return user;
     })().finally(() => this.logining = false);
@@ -40,8 +40,33 @@ export const UnloginedGlobalUser = new class {
   async loginByEmailCode(email: string, code: string) {
     this.logining = true;
     const promise = (async () => {
-      const user = await loginByEmailCode(email, code);
-      (axiosInstance.defaults.headers as unknown as { token: string })['token'] = user.token;
+      const { user, token } = await loginByEmailCode(email, code);
+      (axiosInstance.defaults.headers as unknown as { token: string })['token'] = token;
+      storage.token = token;
+      this.assign(user);
+      return user;
+    })().finally(() => this.logining = false);
+    return await promise;
+  }
+
+  async loginByPassword(uname: string, upass: string) {
+    this.logining = true;
+    const promise = (async () => {
+      const { user, token } = await loginByPassword(uname, upass);
+      (axiosInstance.defaults.headers as unknown as { token: string })['token'] = token;
+      storage.token = token;
+      this.assign(user);
+      return user;
+    })().finally(() => this.logining = false);
+    return await promise;
+  }
+
+  async registerByPassword(uname: string, upass: string) {
+    this.logining = true;
+    const promise = (async () => {
+      const { user, token } = await registerByPassword(uname, upass);
+      (axiosInstance.defaults.headers as unknown as { token: string })['token'] = token;
+      storage.token = token;
       this.assign(user);
       return user;
     })().finally(() => this.logining = false);

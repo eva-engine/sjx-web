@@ -7,12 +7,12 @@ const axiosInstance = Axios.create({
   headers: {
     'Content-Type': 'application/json;charset=utf8',
     'Access-Control-Allow-Origin': '*'
-  }
+  },
 })
 axiosInstance.interceptors.response.use(async res => {
   if (res.status !== 200) throw new Error('server error');
   return res.data.data;
 }, error => {
-  throw error;
+  throw error.response?.data.message ?? error.message;
 })
 export { axiosInstance };

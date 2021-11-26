@@ -1,9 +1,10 @@
+import EventEmitter from "eventemitter3";
 import { storage } from "../../storage";
 import { Actions } from "./action";
 import { CreateStruct, MessageStruct, RoomOptions, ToBType, ToSType } from "./define";
 
 const WSBASE_URL = import.meta.env.VITE_WS_DOMAIN as string;
-export const globalSocket = new class {
+export const globalSocket = new class extends EventEmitter {
   socket?: WebSocket
 
   get linking() {
@@ -20,8 +21,9 @@ export const globalSocket = new class {
       socket.onmessage = e => {
         try {
           const struct = JSON.parse(e.data) as MessageStruct<ToBType>;
-          console.log(struct);
+          //@ts-ignore
           Actions[struct.type]?.call(this, struct);
+          this.emit(`msg_${struct.type}`, struct);
         } catch (e) {
           console.error(e);
         }

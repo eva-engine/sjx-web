@@ -5,6 +5,8 @@ import { UnloginedGlobalUser } from "../../net/user";
 import { storage } from "../../storage";
 import Toast from "universal-toast";
 import "./index.scss";
+import { resource } from "@eva/eva.js";
+import { resources } from "../../util/resource";
 
 const LoginMode = {
   Email: 0,
@@ -39,6 +41,8 @@ export function LoginPage() {
         }
       }
     })()
+    resource.addResource(resources);
+    resource.preload();
   }, [])
 
   async function handleSubmit() {

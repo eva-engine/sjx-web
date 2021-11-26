@@ -1,10 +1,12 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router";
 import { globalSocket } from "../../net/socket";
 import { RoomMode, RoomSize } from "../../net/socket/define";
 import { GlobalUser } from "../../net/user";
 import "./index.scss";
 
 export function MainPage() {
+  const history = useHistory();
 
   const [battlePage, setBattlePage] = useState(true);
   const [rank, setRank] = useState('Loading');
@@ -45,7 +47,7 @@ export function MainPage() {
         ))} */}
       </div>
       <div className="footer">
-        <div className="item create-room-btn" onClick={wantCreateRoom}>创建房间</div>
+        <div className="item create-room-btn" onClick={() => history.push('/create')}>创建房间</div>
         <div className="item quick-start-btn" onClick={wantQuickStart}>快速加入</div>
       </div>
     </div >

@@ -1,8 +1,12 @@
 import type { globalSocket } from ".";
-import { MessageStruct, ToBType } from "./define";
+import { MessageStruct, RoomStruct, ToBType } from "./define";
 
-export const Actions: Partial<Record<ToBType, (this: typeof globalSocket, data: MessageStruct<ToBType>) => void>> = {
-  [ToBType.Room]: function () {
-    
+export type Actions = {
+  [T in ToBType]: (this: typeof globalSocket, data: MessageStruct<T>) => void
+}
+
+export const Actions: Partial<Actions> = {
+  [ToBType.Room]: function (struct: RoomStruct) {
+    const room = struct.data;
   }
 }
